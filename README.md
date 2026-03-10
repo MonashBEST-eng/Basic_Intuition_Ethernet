@@ -7,8 +7,7 @@
 2. [Board Setup](#board-setup)
 3. [Hardware Configuration](#hardware-configuration)
 4. [Software Configuration](#software-configuration)
-5. [MQTT Protocol](#mqtt-protocol)
-6. [References](#references)
+5. [References](#references)
 
 ---
 ## Overview
