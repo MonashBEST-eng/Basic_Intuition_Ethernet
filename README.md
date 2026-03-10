@@ -177,7 +177,7 @@ Build the code and verify the following are correct:
 - https://github.com/eziya/STM32F4_HAL_ETH_MQTT_CLIENT
 - https://community.st.com/t5/stm32-mcus/how-to-create-a-project-for-stm32h7-with-ethernet-and-lwip-stack/ta-p/49308
 
-### 7. MPU Configuration
+### MPU Configuration
 
 ```
 System Core → Cortex_M7 → Parameter Settings
