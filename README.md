@@ -49,6 +49,7 @@ Example of board setup for MQTT protocol
 System Core → RCC → HSE → Crystal / Ceramic Resonator
 ```
 ![alt text](images/image-7.png)
+
 **Clock configuration:**
 
 ```
