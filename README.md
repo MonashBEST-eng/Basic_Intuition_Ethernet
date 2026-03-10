@@ -148,7 +148,9 @@ Protocol Options for LWIP
 ![alt text](images/image-5.png)
 
 **Checksum:**
+
 Makesure `CHECKSUM_BY_HARDWARE` is enabled.
+
 ---
 ### 6. Enable the Cache
 
