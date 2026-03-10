@@ -114,6 +114,7 @@ The ETH Parameter Settings for proper connection
 <p>
 
 Leave all remaining ETH parameters as default.
+
 ---
 ### 5. Enable LwIP
 **Navigate to:**
