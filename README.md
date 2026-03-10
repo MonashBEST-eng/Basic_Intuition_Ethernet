@@ -73,6 +73,7 @@ Since we using FreeRTOS, the `Timebase Source` is set to `TIM6`
 Middleware → FreeRTOS_M7 → Interface → CMSIS_V1
 ```
 Change `ENABLE_FPU` and `MINIMAL_STACK_SIZE`.
+
 ![alt text](images/image-8.png)
 
 ---
@@ -106,7 +107,9 @@ Example table of GPIO Settings for Ethernet connection
 <p>
 
 **Parameter Settings:** 
+
 ![alt text](images/image-2.png)
+
 <p align="center">
 The ETH Parameter Settings for proper connection  
 <p>
@@ -126,6 +129,7 @@ Middleware → LWIP → Enable LWIP on Cortex M7
   - Gateway: `192.168.1.1` or `0.0.0.0` (need to check)
 
 ![alt text](images/image-3.png)
+
 <p align="center">
 Protocol Options for LWIP  
 <p>
