@@ -28,7 +28,7 @@ This guide covers setting up Ethernet on the STM32H755ZI-Q using:
 1. Connect the board to power supply or USB cable for flashing 
 2. Connect the board to a **router/switch** via RJ45 cable 
 
-![alt text](image.png)
+![alt text](images/image.png)
 <p align="center">
 Example of board setup for MQTT protocol 
 <p>
@@ -48,21 +48,21 @@ Example of board setup for MQTT protocol
 ```
 System Core → RCC → HSE → Crystal / Ceramic Resonator
 ```
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 **Clock configuration:**
 
 ```
 Enable CSS → Configure 216 MHz for core
 ```
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 <p align="center">
 Example of clock configuration to avoid Aliasing  
 <p>
 
 **SYS configuration:** 
 Since we using FreeRTOS, the `Timebase Source` is set to `TIM6`
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 ---
 
@@ -72,7 +72,7 @@ Since we using FreeRTOS, the `Timebase Source` is set to `TIM6`
 Middleware → FreeRTOS_M7 → Interface → CMSIS_V1
 ```
 Change `ENABLE_FPU` and `MINIMAL_STACK_SIZE`.
-![alt text](image-8.png)
+![alt text](images/image-8.png)
 
 ---
 
@@ -105,7 +105,7 @@ Example table of GPIO Settings for Ethernet connection
 <p>
 
 **Parameter Settings:** 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 <p align="center">
 The ETH Parameter Settings for proper connection  
 <p>
@@ -124,7 +124,7 @@ Middleware → LWIP → Enable LWIP on Cortex M7
   - Netmask: `255.255.255.0`
   - Gateway: `192.168.1.1` or `0.0.0.0` (need to check)
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 <p align="center">
 Protocol Options for LWIP  
 <p>
@@ -139,9 +139,9 @@ Protocol Options for LWIP
 - `ETH_RX_BUFFER_CNT`: `12`
 
 - With RTOS enabled, then enable `LWIP_NETIF_LINK_CALLBACK` to check LINK status
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 - Enable `LWIP_SO_RCVBUF` to check the receive buffer in MQTT library 
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 
 **Checksum:**
 Makesure `CHECKSUM_BY_HARDWARE` is enabled.
@@ -180,7 +180,7 @@ System Core → Cortex_M7 → Parameter Settings
 
 Configure three MPU regions (need to check the **datasheet** for correct memory address):
 
-![alt text](image-9.png)
+![alt text](images/image-9.png)
 
 | Region | Purpose                                     | Base Address |
 |--------|---------------------------------------------|--------------|
@@ -191,13 +191,13 @@ Configure three MPU regions (need to check the **datasheet** for correct memory 
 Enable MPU and set the following Regions as below:
 
 - MPU Settings for Region 0 (memory protection for entire board)
-![alt text](image-11.png)
+![alt text](images/image-11.png)
 
 - MPU Settings for Region 1 (memory protection for LWIP_Heap)
-![alt text](image-12.png)
+![alt text](images/image-12.png)
 
 - MPU Settings for Region 2 (memory protection for Tx & Rx Descriptors)
-![alt text](image-13.png)
+![alt text](images/image-13.png)
 ---
 
 
