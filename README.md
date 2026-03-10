@@ -196,13 +196,17 @@ Configure three MPU regions (need to check the **datasheet** for correct memory 
 Enable MPU and set the following Regions as below:
 
 - MPU Settings for Region 0 (memory protection for entire board)
+
 ![alt text](images/image-11.png)
 
 - MPU Settings for Region 1 (memory protection for LWIP_Heap)
+
 ![alt text](images/image-12.png)
 
 - MPU Settings for Region 2 (memory protection for Tx & Rx Descriptors)
+
 ![alt text](images/image-13.png)
+
 ---
 
 
