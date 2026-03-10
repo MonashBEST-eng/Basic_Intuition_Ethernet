@@ -171,12 +171,6 @@ Build the code and verify the following are correct:
 
 ---
 
-
-
-## References 
-- https://github.com/eziya/STM32F4_HAL_ETH_MQTT_CLIENT
-- https://community.st.com/t5/stm32-mcus/how-to-create-a-project-for-stm32h7-with-ethernet-and-lwip-stack/ta-p/49308
-
 ### MPU Configuration
 
 ```
@@ -208,6 +202,10 @@ Enable MPU and set the following Regions as below:
 ![alt text](images/image-13.png)
 
 ---
+
+## References 
+- https://github.com/eziya/STM32F4_HAL_ETH_MQTT_CLIENT
+- https://community.st.com/t5/stm32-mcus/how-to-create-a-project-for-stm32h7-with-ethernet-and-lwip-stack/ta-p/49308
 
 
 
