@@ -7,7 +7,9 @@
 2. [Board Setup](#board-setup)
 3. [Hardware Configuration](#hardware-configuration)
 4. [Software Configuration](#software-configuration)
-5. [References](#references)
+5. [Checkpoint 1](#checkpoint-1)
+5. [MQTT Dependencies](#mqtt)
+6. [References](#references)
 
 ---
 ## Overview
@@ -205,10 +207,147 @@ Enable MPU and set the following Regions as below:
 
 ---
 
+## Software Configuration 
+
+In this setup, we only used **CM7 Core**
+
+### `STM32H755ZITX_FLASH.ld` ⚠️ MOST IMPORTANT
+
+Add the following linker script section to map LwIP buffers to D2 SRAM:
+
+```ld
+/* Modification start */
+.lwip_sec (NOLOAD) :
+{
+  . = ABSOLUTE(0x30000000);
+  *(.RxDecripSection)
+ 
+  . = ABSOLUTE(0x30000100);
+  *(.TxDecripSection)
+ 
+  . = ABSOLUTE(0x30000200);
+  *(.Rx_PoolSection)
+ 
+} >RAM_D2
+```
+
+---
+
+### `ethernetif.c`
+
+Check and add these lines of code if not show in `ethernetif.c`:
+
+```
+Project Explorer → CM7 → LWIP → Target → ethernetif.c
+```
+
+```c
+/* USER CODE BEGIN 2 */
+#if defined ( __ICCARM__ ) /*!< IAR Compiler */
+#pragma location = 0x30000200
+extern u8_t memp_memory_RX_POOL_base[];
+ 
+#elif defined ( __CC_ARM ) /* MDK ARM Compiler */
+__attribute__((at(0x30000200))) extern u8_t memp_memory_RX_POOL_base[];
+ 
+#elif defined ( __GNUC__ ) /* GNU Compiler */
+__attribute__((section(".Rx_PoolSection"))) extern u8_t memp_memory_RX_POOL_base[];
+
+#endif
+/* USER CODE END 2 */
+```
+
+---
+
+### `main.c`
+ 
+Call `MX_LWIP_Process()` in the main loop, along with an LED heartbeat to confirm the system is not hanging:
+ 
+```c
+int main(void)
+{
+  // ...
+ 
+  while (1)
+  {
+    MX_LWIP_Process();
+ 
+    /* Flashing LED to confirm system is running */
+    if (count++ & 0x040000)
+    {
+      BSP_LED_On(LED_GREEN);
+    }
+    else
+    {
+      BSP_LED_Off(LED_GREEN);
+    }
+ 
+    /* USER CODE END WHILE */
+    /* USER CODE BEGIN 3 */
+  }
+ 
+  // ...
+}
+```
+
+---
+
+## Checkpoint 1 
+- Build & Flash the board to check for errors 
+- Connect the board to a router/switch via RJ45 cable (like the setup above)
+- From your laptop/PC ping the STM32 using `CommandPrompt` or `Windows PowerShell` with the IP address that you set up (eg. 192.168.1.120)
+
+```bash 
+ping 192.168.1.120
+```
+- You should see the following response as: 
+```bash
+Pinging 192.168.50.1 with 32 bytes of data:
+Reply from 192.168.50.1: bytes=32 time=1ms TTL=64
+Reply from 192.168.50.1: bytes=32 time=1ms TTL=64
+Reply from 192.168.50.1: bytes=32 time=2ms TTL=64
+Reply from 192.168.50.1: bytes=32 time=1ms TTL=64
+
+Ping statistics for 192.168.50.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+```
+- If encounter `Request timed out.` for 4 ping tests. Check the configuration again and debug.
+
+## MQTT
+
+### 1. Add library & data path
+
+- In this setup, we will use the MQTT library from Paho github: [Paho](https://github.com/eclipse/paho.mqtt.embedded-c)
+- Select only the `MQTTPacket` folder and `MQTTClient.c/h` file and add the corresponding source code to the `Middlewares/Third_Party/MQTT` 
+- To interface with library, created 2 files: `MQTTInterface.c/h`
+- Your project now will look like below: 
+
+![alt text](images\image_14.png)
+
+- Since you need to add the include path, please add the MQTT folder and MQTT/MQTTPacket folder paths as shown below: 
+
+```
+Project → Properties → Settings → Include paths 
+```
+
+![alt text](images/image_16.png)
+
+- Click `Apply and Close`
+
+### 2. MQTTInterface.h
+- Declare `timer` and `network` functions that need to be implemented. 
+- As using Network API, define corresponding functions as in [MQTTInterface.h](MQTTInterface.h)
+
+### 3. MQTTInterface.c
+- Can use the code as in [MQTTInterface.c](MQTTInterface.c)
+
+
 ## References 
 - https://github.com/eziya/STM32F4_HAL_ETH_MQTT_CLIENT
 - https://community.st.com/t5/stm32-mcus/how-to-create-a-project-for-stm32h7-with-ethernet-and-lwip-stack/ta-p/49308
-
+- https://github.com/eclipse/paho.mqtt.embedded-c
 
 
 
