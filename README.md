@@ -324,7 +324,7 @@ Approximate round trip times in milli-seconds:
 - To interface with library, created 2 files: `MQTTInterface.c/h`
 - Your project now will look like below: 
 
-![alt text](images\image_14.png)
+![alt text](images/image_14.png)
 
 - Since you need to add the include path, please add the MQTT folder and MQTT/MQTTPacket folder paths as shown below: 
 
