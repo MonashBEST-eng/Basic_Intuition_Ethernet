@@ -8,8 +8,9 @@
 3. [Hardware Configuration](#hardware-configuration)
 4. [Software Configuration](#software-configuration)
 5. [Checkpoint 1](#checkpoint-1)
-5. [MQTT Dependencies](#mqtt)
-6. [References](#references)
+6. [MQTT Dependencies](#mqtt)
+7. [MQTT Testing](#mqtt-testing)
+10. [References](#references)
 
 ---
 ## Overview
@@ -343,7 +344,25 @@ Project → Properties → Settings → Include paths
 ### 3. MQTTInterface.c
 - Can use the code as in [MQTTInterface.c](MQTTInterface.c)
 
+## MQTT Testing
+(1st draft - will refine later)
+- Download MQTT Mostquitto -> Set up broker on Laptop / PC 
+- **HAVE TO ADD THE MOSQUITTO BROKER TO PATH** (more on the setup on Mosquitto website)
+- Run the broker on Laptop in `CommandPromt`: 
+```Bash 
+mosquitto -v 
+```
+- Open another `CommandPrompt` & run a publisher (Replace bracket with actual IP)
+```Bash 
+mosquitto_sub -h <000.000.000.000> -t <topic>
+mosquitto_sub -h 192.168.1.100 -t test #Example
+```
 
+- To publish a text message on to the topic, open a another `CommandPrompt`:
+```Bash 
+mosquitto_pub -h <000.000.000.000> -t <topic> -m <"message"> 
+mosquitto_pub -h 192.168.1.100 -t test -m "hello"
+```
 ## References 
 - https://github.com/eziya/STM32F4_HAL_ETH_MQTT_CLIENT
 - https://community.st.com/t5/stm32-mcus/how-to-create-a-project-for-stm32h7-with-ethernet-and-lwip-stack/ta-p/49308
