@@ -40,7 +40,7 @@ This guide covers setting up Ethernet on the STM32H755ZI-Q using:
    - Subnet mask: 255.255.255.0
    Leave everything else as is and save
 
-![alt text](images/image17.png)
+![alt text](images/image-17.png)
 <p align="center">
 Local Ethernet Config
 <p>
