@@ -27,6 +27,26 @@ This guide covers setting up Ethernet on the STM32H755ZI-Q using:
 ---
 
 ### Board Setup 
+**Note you can either use a router or use your PC ethernet**
+
+**PC Setup**
+1. Connect the board to power supply or USB cable for flashing
+2. Connect an ethernet cable to your PC
+3. Go Settings -> Network and Ethernet -> Ethernet
+4. Click on IP assignment and change to manual
+5. Turn on IPv4
+6. Enter the following:
+   - IP address: 192.168.1.10
+   - Subnet mask: 255.255.255.0
+   Leave everything else as is and save
+
+![alt text](images/image17.png)
+<p align="center">
+Local Ethernet Config
+<p>
+
+
+**Router Setup**
 1. Connect the board to power supply or USB cable for flashing 
 2. Connect the board to a **router/switch** via RJ45 cable 
 
